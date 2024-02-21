@@ -49,4 +49,34 @@ public class GuestServiceImpl implements GuestService{
 		return dto;
 	}
 
+	/**
+	 * Updates guest details
+	 * 
+	 * @param: String -> id of guest
+	 * @param: Guest -> Guest object with details that needs updation
+	 * 
+	 * @return: GuestDTO -> Customized object
+	 */
+	@Override
+	public GuestDTO updateGuestDetails(String guestId, Guest guest) {
+		
+		Optional<Guest> opt = guestRepository.findById(guestId);
+		Guest foundGuest = opt.get();
+		if (guest.getGuest_name() != null) {
+			foundGuest.setGuest_name(guest.getGuest_name());
+		}
+		if (guest.getGender() != null) {
+			foundGuest.setGender(guest.getGender());
+		}
+		if (guest.getBio() != null) {
+			foundGuest.setBio(guest.getBio());
+		}
+		if (guest.getDob() != null) {
+			foundGuest.setDob(guest.getDob());
+		}
+		Guest savedGuest = guestRepository.save(foundGuest);
+		GuestDTO dto = helper.convertToGuestDTO(savedGuest);
+		return dto;
+	}
+
 }

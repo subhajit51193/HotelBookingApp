@@ -8,4 +8,6 @@ public interface GuestService {
 	public GuestDTO createGuest(Guest guest);
 	
 	public GuestDTO getGuestDetailsById(String guestId);
+	
+	public GuestDTO updateGuestDetails(String guestId,Guest guest);
 }

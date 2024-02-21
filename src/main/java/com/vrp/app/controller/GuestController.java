@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +44,18 @@ public class GuestController {
 		
 		GuestDTO res = guestService.getGuestDetailsById(id);
 		return new ResponseEntity<GuestDTO>(res,HttpStatus.OK);
+	}
+	
+	/**
+	 * 
+	 * @param: Guest -> Guest details
+	 * @param String -> id of guest
+	 * @return: GuestDTO -> Customized object
+	 */
+	@PutMapping("/update/{id}")
+	public ResponseEntity<GuestDTO> updateGuestHandler(@RequestBody Guest guest, @PathVariable String id){
+		
+		GuestDTO res = guestService.updateGuestDetails(id, guest);
+		return new ResponseEntity<GuestDTO>(res,HttpStatus.ACCEPTED);
 	}
 }
